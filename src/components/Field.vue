@@ -16,9 +16,24 @@ defineProps({
     type: String,
     required: false,
   },
+  OnChange: {
+    type: Function,
+    required: false,
+  },
 });
 
+// inject values from Formik
+const setValueChange = inject(setValueChangeKey);
 
+// const value = ref("");
+
+function handleChange(event) {
+  console.log("Handle change trigger", event.target.value);
+  value.value = event.target.value;
+  setValueChange(props.name, event.target.value);
+}
+
+// provide(setValueChangeKey, setValueChange);
 </script>
 
 <template>

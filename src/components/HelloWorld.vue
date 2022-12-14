@@ -3,12 +3,12 @@ import Formik from "../components/Formik.vue";
 import Field from "../components/Field.vue";
 import { reactive, ref } from "vue";
 
-const _initialValues = {
+const _initialValues = reactive({
   name: "sidox",
   email: "",
   color: "red",
   isDeveloper: true,
-};
+});
 
 function validate(values) {
   console.log("Validate trigger >>>", values);
@@ -17,6 +17,7 @@ function validate(values) {
 function onSubmit(values) {
   console.log("On submit trigger >>>", values);
 }
+
 </script>
 
 <template>
@@ -28,11 +29,17 @@ function onSubmit(values) {
     <template #default="{ values, errors, handleChange, handleSubmit }">
       <form @submit.prevent="handleSubmit">
         <p>
-          <Field type="text" name="name" as="input" placeholder="Enter name" />
+          <!-- handle change on Field -->
+          
+          <Field
+          
+          v-model:value="values.name"
+          type="text" name="name" as="input" placeholder="Enter name" />
           <!-- <span v-if="errors.name">{{ errors.name }}</span> -->
         </p>
         <p>
           <Field
+          v-model:value="values.email"
             type="email"
             name="email"
             as="input"
@@ -42,9 +49,12 @@ function onSubmit(values) {
         </p>
         <p>
           Are you a developer ?
-          <Field type="checkbox" name="isDeveloper" as="input" />
+          <Field v-model:value="values.isDeveloper"
+           type="checkbox" name="isDeveloper" as="input" />
           <br>
-          <Field name="color" as="select">
+          <Field 
+            v-model:value="values.color"
+          name="color" as="select">
             <template #default>
               <option value="red">Red</option>
               <option value="green">Green</option>
