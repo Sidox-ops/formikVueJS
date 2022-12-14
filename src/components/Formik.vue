@@ -23,7 +23,7 @@ const props = defineProps({
 const values = reactive(props.initialValues);
 
 function handleSubmit() {
-  console.log("Handle submit trigger", value);
+  console.log("Handle submit trigger");
 }
 
 function setValueChange(name, value) {

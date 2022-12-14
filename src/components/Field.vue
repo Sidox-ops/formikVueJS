@@ -18,12 +18,7 @@ defineProps({
   },
 });
 
-const values = reactive({});
 
-inject(setValueChangeKey, (name, value) => {
-  console.log("Set value change trigger", name, value);
-  values[name] = value;
-});
 </script>
 
 <template>
