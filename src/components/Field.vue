@@ -1,6 +1,6 @@
 <script setup>
 import { provide, reactive, ref, inject } from "vue";
-import { setValueChange as setValueChangeKey } from "./providers/FormikProviderKeys.js";
+import { valuesKey } from "./providers/FormikProviderKeys.js";
 
 defineProps({
   name: {
@@ -23,21 +23,20 @@ defineProps({
 });
 
 // inject values from Formik
-const setValueChange = inject(setValueChangeKey);
-
+const formData = inject(valuesKey);
+console.log("Field formData", formData);
 // const value = ref("");
 
 function handleChange(event) {
-  console.log("Handle change trigger", event.target.value);
-  value.value = event.target.value;
-  setValueChange(props.name, event.target.value);
+  console.log("Handle change trigger", event.target.value, formData);
+  formData.values[props.name] = event.target.value;
 }
 
-// provide(setValueChangeKey, setValueChange);
 </script>
 
 <template>
   <component :is="as" :type="type" :name="name" :value="value"
+  @input="handleChange"
     ><slot></slot
   ></component>
 </template>

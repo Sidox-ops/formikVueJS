@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, provide } from "vue";
 import {
-  values as valuesKey,
+  valuesKey,
   setValueChange as setValueChangeKey,
 } from "./providers/FormikProviderKeys.js";
 
@@ -37,7 +37,14 @@ function setValueChange(name, value) {
   values[name] = value;
 }
 
-provide(valuesKey, setValueChange);
+const formData = reactive({
+  values: {},
+  errors: {},
+  handleChange: handleChange,
+  handleSubmit: handleSubmit,
+});
+
+provide(valuesKey, formData);
 </script>
 
 <template>

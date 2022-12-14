@@ -1,2 +1,2 @@
-export const values = Symbol("values");
+export const valuesKey = Symbol("valuesKey");
 export const setValueChange = Symbol("setValueChange");
